@@ -1,10 +1,13 @@
 from modules import *
 import logging
 import warnings
+import os
 warnings.filterwarnings("ignore")
 
+current_directory = os.path.dirname(os.path.abspath(__file__))
+
 # Logging configuration
-logging.basicConfig(filename='logs//logging.log', level=logging.INFO)
+logging.basicConfig(filename=f'{current_directory}//logs//logging.log', level=logging.INFO)
 
 def orchestrator():
 

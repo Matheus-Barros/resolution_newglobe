@@ -9,8 +9,11 @@ warnings.filterwarnings("ignore")
 
 def loading_data(logging, df_FactPupilAttendance, dim_tables):
     try:
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        parent_directory = os.path.abspath(os.path.join(current_directory, os.pardir))        
+
         # Define the database URL for SQLite
-        db_url = "sqlite:///database/newglobe.db"
+        db_url = f"sqlite:///{parent_directory}//database//newglobe.db"
         engine = create_engine(db_url)
 
         # Upload the fact table "FactPupilAttendance"

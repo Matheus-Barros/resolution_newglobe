@@ -77,12 +77,11 @@ Please refer to the [Database Schema.pdf](Database%20Schema.pdf) document for a 
 To execute the ETL process, follow the steps below:
 
 1. Make sure you have Python installed on your system.
-2. First navigate to the directory where the `main.py` file is located, using the command: cd /path/to/main.py.
-3. Install the required libraries by running the following command:
+2. Install the required libraries by running the following command:
    ```
    pip install -r requirements.txt
    ```
-4. Execute the `main.py` script by running the following command:
+3. Execute the `main.py` script by running the following command:
    ```
    python main.py
    ```

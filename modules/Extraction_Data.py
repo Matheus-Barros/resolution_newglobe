@@ -6,9 +6,12 @@ warnings.filterwarnings("ignore")
 
 def extraction_data(logging):
     try:
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        parent_directory = os.path.abspath(os.path.join(current_directory, os.pardir))        
+
         # Read the PupilAttendance.csv and PupilData.csv files using pandas
-        df_pupilAttendance = pd.read_csv('data_csv//PupilAttendance.csv')
-        df_pupilData = pd.read_csv('data_csv//PupilData.csv')   
+        df_pupilAttendance = pd.read_csv(f'{parent_directory}//data_csv//PupilAttendance.csv')
+        df_pupilData = pd.read_csv(f'{parent_directory}//data_csv//PupilData.csv')   
 
         # Log a success message indicating the script has finished successfully
         logging.info('Script {script} finished with success'.format(script=os.path.basename(__file__)))
