@@ -8,19 +8,23 @@ logging.basicConfig(filename='logs//logging.log', level=logging.INFO)
 
 def orchestrator():
 
+    # Extraction Phase
     resp = extraction_data(logging)
     if resp[0] == 'OK':
-        df_pupilAtendance = resp[1]
+        df_pupilAttendance = resp[1]
         df_pupilData = resp[2]
     
+    # Transformation Phase
     if resp[0] == 'OK':
-        resp = transformation_data(logging,df_pupilAtendance,df_pupilData)
+        resp = transformation_data(logging,df_pupilAttendance,df_pupilData)
         df_FactPupilAttendance = resp[1]
         dim_tables = resp[2]
 
+    # Loading Phase
     if resp[0] == 'OK':
         resp = loading_data(logging,df_FactPupilAttendance,dim_tables)
 
+    # Check the overall status and log the appropriate message
     if resp[0] == 'OK':
         logging.info('Script finished successfully')
     else:
