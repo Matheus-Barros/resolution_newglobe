@@ -1,3 +1,5 @@
+import os
+import sys
 import pandas as pd
 import warnings
 warnings.filterwarnings("ignore")
@@ -77,14 +79,16 @@ def transformation_data(logging, df_pupilAttendance, df_pupilData):
         }
 
         # Log a success message indicating the script has finished successfully
-        logging.info('Script {script} finished with success'.format(script='transformation_data.py'))
+        logging.info('Script {script} finished with success'.format(script=os.path.basename(__file__)))
 
         # Return a tuple with the status 'OK', the fact table, and the dimension tables
         return ('OK', df_FactPupilAttendance, dim_tables)
 
     except Exception as e:
         # Log an error message if an exception occurs during the script execution
-        logging.error('Script {script} finished with error'.format(script='transformation_data.py'))
+        _, _, tb = sys.exc_info()
+        line_number = tb.tb_lineno
+        logging.error('Error in the line:{line} of the script {script} ({file})'.format(line=line_number, script=os.path.basename(__file__), file=__file__))
         logging.error(str(e))
 
         # Raise the exception to propagate the error

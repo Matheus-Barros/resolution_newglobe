@@ -1,3 +1,5 @@
+import os
+import sys
 import pandas as pd
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
@@ -21,15 +23,17 @@ def loading_data(logging, df_FactPupilAttendance, dim_tables):
             dim_df.to_sql(table_name, engine, if_exists="replace", index=False)
 
         # Log a success message indicating the script has finished successfully
-        logging.info('Script {script} finished with success'.format(script='loading_data.py'))
+        logging.info('Script {script} finished with success'.format(script=os.path.basename(__file__)))
 
         # Return a tuple with the status 'OK' and the names of the dataframes used
-        return ('OK')
+        return ('OK','')
 
     except Exception as e:
         # Log an error message if an exception occurs during the script execution
-        logging.error('Script {script} finished with error'.format(script='loading_data.py'))
+        _, _, tb = sys.exc_info()
+        line_number = tb.tb_lineno
+        logging.error('Error in the line:{line} of the script {script} ({file})'.format(line=line_number, script=os.path.basename(__file__), file=__file__))
         logging.error(str(e))
-
+        
         # Raise the exception to propagate the error
         raise e
